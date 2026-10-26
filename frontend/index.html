@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Predict a mental health score from lifestyle and social media habits." />
+  <title>Mind Score Predictor</title>
+  <link rel="stylesheet" href="/style.css" />
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div class="brain-icon" aria-hidden="true">🧠</div>
+      <p class="eyebrow">AI-POWERED WELLNESS INSIGHT</p>
+      <h1>Mental Health Score Predictor</h1>
+      <p class="subtitle">Explore how your digital habits and daily routine relate to your predicted score.</p>
+      <p class="disclaimer">This tool provides a model prediction, not a clinical assessment or diagnosis.</p>
+    </header>
+
+    <form id="prediction-form">
+      <div class="input-grid">
+        <section class="input-card">
+          <div class="section-heading"><span>👤</span><div><h2>Who Are You?</h2><p>Basic background</p></div></div>
+          <label for="age">Age</label>
+          <input id="age" name="age" type="number" min="10" max="100" value="20" required />
+
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option>Male</option><option>Female</option>
+          </select>
+
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option>India</option><option>USA</option><option>Canada</option><option>Australia</option>
+            <option>UK</option><option>Germany</option><option>Mexico</option><option>Turkey</option>
+            <option>France</option><option>Spain</option><option>Other</option>
+          </select>
+
+          <label for="academic_level">Study Level</label>
+          <select id="academic_level" name="academic_level" required>
+            <option>High School</option><option selected>Undergraduate</option><option>Graduate</option>
+          </select>
+        </section>
+
+        <section class="input-card">
+          <div class="section-heading"><span>📱</span><div><h2>Tech Habits</h2><p>Your digital routine</p></div></div>
+          <label for="most_used_platform">Most Used App</label>
+          <select id="most_used_platform" name="most_used_platform" required>
+            <option>Facebook</option><option>LinkedIn</option><option selected>Instagram</option><option>Snapchat</option>
+            <option>Twitter</option><option>YouTube</option><option>TikTok</option><option>LINE</option>
+            <option>KakaoTalk</option><option>VKontakte</option><option>WhatsApp</option><option>WeChat</option>
+          </select>
+
+          <label for="purpose_of_use">Why do you use it?</label>
+          <select id="purpose_of_use" name="purpose_of_use" required>
+            <option>Networking</option><option>Education</option><option selected>Entertainment</option><option>News</option>
+          </select>
+
+          <div class="range-label"><label for="avg_daily_usage_hours">Average Daily Social Media Usage</label><output id="usage-output" for="avg_daily_usage_hours">3 hours</output></div>
+          <input id="avg_daily_usage_hours" name="avg_daily_usage_hours" type="range" min="0" max="24" step="0.5" value="3" />
+
+          <label for="daily_unlocks">Phone Unlocks / Day</label>
+          <input id="daily_unlocks" name="daily_unlocks" type="number" min="0" step="1" value="50" required />
+        </section>
+
+        <section class="input-card">
+          <div class="section-heading"><span>🏃</span><div><h2>Lifestyle</h2><p>Daily habits</p></div></div>
+          <div class="range-label"><label for="study_hours">Study Hours / Day</label><output id="study-output" for="study_hours">4 hours</output></div>
+          <input id="study_hours" name="study_hours" type="range" min="0" max="24" step="0.5" value="4" />
+
+          <div class="range-label"><label for="physical_activity_hours">Exercise Hours / Day</label><output id="physical-output" for="physical_activity_hours">1 hour</output></div>
+          <input id="physical_activity_hours" name="physical_activity_hours" type="range" min="0" max="24" step="0.5" value="1" />
+
+          <div class="range-label"><label for="sleep_hours_per_night">Sleep Hours / Night</label><output id="sleep-output" for="sleep_hours_per_night">7 hours</output></div>
+          <input id="sleep_hours_per_night" name="sleep_hours_per_night" type="range" min="0" max="24" step="0.5" value="7" />
+
+          <label for="stress_level">Current Stress</label>
+          <select id="stress_level" name="stress_level" required>
+            <option selected>Low</option><option>Medium</option><option>High</option><option>Very High</option>
+          </select>
+        </section>
+      </div>
+
+      <div class="submit-area">
+        <button id="predict-button" type="submit"><span class="button-label">🚀 PREDICT MY SCORE NOW 🚀</span><span class="button-spinner" aria-hidden="true"></span></button>
+        <p class="form-hint">Complete the fields above, then generate your prediction.</p>
+      </div>
+    </form>
+
+    <section id="result-panel" class="result-panel" aria-live="polite" hidden>
+      <p class="result-kicker">YOUR PREDICTED SCORE</p>
+      <div id="score-value" class="score-value">—</div>
+      <p class="result-note">This is an estimate generated by the machine learning model. It should not be used on its own to make health decisions.</p>
+    </section>
+    <div id="error-message" class="error-message" role="alert" hidden></div>
+    <footer>Mind Score Predictor <span>•</span> Machine learning demonstration</footer>
+  </main>
+</body>
+</html>

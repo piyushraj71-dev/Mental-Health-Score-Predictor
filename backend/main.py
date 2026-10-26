@@ -3,7 +3,7 @@ import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import Literal
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 
 
@@ -16,15 +16,6 @@ top_countries = ['Other','India','USA','Canada','Australia','UK','Germany','Mexi
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-#A first Pydantic Model
 class StudentData(BaseModel):
     age                     : int = Field(..., ge=10, le=100)
     gender                  : Literal['Male', 'Female']
@@ -39,18 +30,11 @@ class StudentData(BaseModel):
     sleep_hours_per_night   : float = Field(..., ge=0, le=24)
     stress_level            : Literal['Medium', 'Low', 'Very High', 'High']
 
-
-
-
-# Describe what we send back
 class PredictionResponse(BaseModel):
     predicted_mental_health_score:float
     
 
-
-
-
-@app.get('/')
+@app.get('/health')
 def show():
     return {'API is running'}
 
@@ -78,5 +62,11 @@ def predict(data: StudentData):
 
    prediction = model.predict(input_row)[0] #6.77
    return PredictionResponse(predicted_mental_health_score=round(float(prediction),2))
+from fastapi.staticfiles import StaticFiles
 
+app.mount(
+    "/",
+    StaticFiles(directory=BASE_DIR / "frontend", html=True),
+    name="frontend"
+)
 
